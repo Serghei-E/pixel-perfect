@@ -64,7 +64,10 @@ function AuthPage() {
   }
 
   async function handleReset() {
-    if (!email) return toast.error("Enter your email address first.");
+    if (!email) {
+      toast.error("Enter your email address first.");
+      return;
+    }
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
       redirectTo: window.location.origin + "/auth",
     });
