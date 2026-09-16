@@ -10,8 +10,8 @@ export function PageHeader({
   children,
 }: {
   title: string;
-  description?: string;
-  children?: ReactNode;
+  description?: string | undefined;
+  children?: ReactNode | undefined;
 }) {
   return (
     <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
@@ -35,9 +35,9 @@ export function StatCard({
 }: {
   label: string;
   value: string;
-  hint?: string;
-  trend?: number;
-  tone?: "default" | "sage" | "terracotta" | "warning";
+  hint?: string | undefined;
+  trend?: number | undefined;
+  tone?: "default" | "sage" | "terracotta" | "warning" | undefined;
 }) {
   const toneRing = {
     default: "",
@@ -86,7 +86,7 @@ const badgeTones: Record<string, string> = {
   Rejected: "bg-muted border-border text-muted-foreground",
 };
 
-export function StatusBadge({ status, className }: { status: string; className?: string }) {
+export function StatusBadge({ status, className }: { status: string; className?: string | undefined }) {
   return (
     <span
       className={cn(
@@ -118,7 +118,7 @@ export function WhyTooltip({ reason }: { reason?: string | null }) {
   );
 }
 
-export function EmptyState({ title, description }: { title: string; description?: string }) {
+export function EmptyState({ title, description }: { title: string; description?: string | undefined }) {
   return (
     <div className="rounded-xl border border-dashed border-border bg-muted/40 p-8 text-center">
       <p className="font-display text-base">{title}</p>
@@ -137,7 +137,7 @@ export function LoadingBlock({ rows = 4 }: { rows?: number }) {
   );
 }
 
-export function ErrorState({ message }: { message?: string }) {
+export function ErrorState({ message }: { message?: string | undefined }) {
   return (
     <div className="rounded-xl border border-destructive/30 bg-destructive/10 p-5 text-sm">
       <p className="font-medium">We couldn't load this information.</p>
