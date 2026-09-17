@@ -355,7 +355,7 @@ function WasteDialog({
   pending: boolean;
 }) {
   const [quantity, setQuantity] = useState("1");
-  const [reason, setReason] = useState<string>(WASTE_REASONS[1]);
+  const [reason, setReason] = useState<string>(WASTE_REASONS[1] ?? "Overproduction");
   const [note, setNote] = useState("");
 
   return (
