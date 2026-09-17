@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as DailyPlanRouteImport } from './routes/daily-plan'
+import { Route as InventoryRouteImport } from './routes/inventory'
 import { Route as ProductionRouteImport } from './routes/production'
 
 const IndexRoute = IndexRouteImport.update({
@@ -29,6 +30,11 @@ const DailyPlanRoute = DailyPlanRouteImport.update({
   path: '/daily-plan',
   getParentRoute: () => rootRouteImport,
 } as any)
+const InventoryRoute = InventoryRouteImport.update({
+  id: '/inventory',
+  path: '/inventory',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProductionRoute = ProductionRouteImport.update({
   id: '/production',
   path: '/production',
@@ -39,12 +45,14 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/daily-plan': typeof DailyPlanRoute
+  '/inventory': typeof InventoryRoute
   '/production': typeof ProductionRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/daily-plan': typeof DailyPlanRoute
+  '/inventory': typeof InventoryRoute
   '/production': typeof ProductionRoute
 }
 export interface FileRoutesById {
@@ -52,20 +60,22 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/daily-plan': typeof DailyPlanRoute
+  '/inventory': typeof InventoryRoute
   '/production': typeof ProductionRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/daily-plan' | '/production'
+  fullPaths: '/' | '/auth' | '/daily-plan' | '/inventory' | '/production'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/daily-plan' | '/production'
-  id: '__root__' | '/' | '/auth' | '/daily-plan' | '/production'
+  to: '/' | '/auth' | '/daily-plan' | '/inventory' | '/production'
+  id: '__root__' | '/' | '/auth' | '/daily-plan' | '/inventory' | '/production'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthRoute: typeof AuthRoute
   DailyPlanRoute: typeof DailyPlanRoute
+  InventoryRoute: typeof InventoryRoute
   ProductionRoute: typeof ProductionRoute
 }
 
@@ -92,6 +102,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DailyPlanRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/inventory': {
+      id: '/inventory'
+      path: '/inventory'
+      fullPath: '/inventory'
+      preLoaderRoute: typeof InventoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/production': {
       id: '/production'
       path: '/production'
@@ -106,6 +123,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthRoute: AuthRoute,
   DailyPlanRoute: DailyPlanRoute,
+  InventoryRoute: InventoryRoute,
   ProductionRoute: ProductionRoute,
 }
 export const routeTree = rootRouteImport
