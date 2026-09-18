@@ -38,7 +38,6 @@ import {
   eur2,
   stockStatus,
   suggestedOrder,
-  toCsv,
   useBusiness,
   useLocations,
   useSuppliers,
@@ -66,6 +65,17 @@ export const Route = createFileRoute("/inventory")({
     </AppShell>
   ),
 });
+
+type IngredientForm = {
+  id?: string;
+  name: string;
+  unit: string;
+  current_stock: number;
+  min_stock: number;
+  avg_daily_usage: number;
+  unit_cost: number;
+  supplier_id: string | null;
+};
 
 type Ingredient = {
   id: string;
@@ -129,17 +139,18 @@ function Inventory() {
   const orderValue = orderRows.reduce((sum, r) => sum + r.order * Number(r.unit_cost), 0);
 
   const saveIngredient = useMutation({
-    mutationFn: async (payload: Record<string, unknown>) => {
-      if (payload.id) {
-        const { id, ...patch } = payload;
-        const { error } = await supabase.from("ingredients").update(patch).eq("id", id as string);
+    mutationFn: async (payload: IngredientForm) => {
+      const { id, ...fields } = payload;
+      if (id) {
+        const { error } = await supabase.from("ingredients").update(fields).eq("id", id);
         if (error) throw error;
-      } else {
-        const { error } = await supabase
-          .from("ingredients")
-          .insert({ ...payload, business_id: business?.id, location_id: locationId });
-        if (error) throw error;
+        return;
       }
+      if (!business) throw new Error("No café found.");
+      const { error } = await supabase
+        .from("ingredients")
+        .insert({ ...fields, business_id: business.id as string, location_id: locationId });
+      if (error) throw error;
     },
     onSuccess: () => {
       toast.success("Inventory saved.");
@@ -174,7 +185,7 @@ function Inventory() {
     mutationFn: async (payload: { name: string; contact_email: string; lead_time_days: number }) => {
       const { error } = await supabase
         .from("suppliers")
-        .insert({ ...payload, business_id: business?.id });
+        .insert({ ...payload, business_id: (business?.id ?? "") as string });
       if (error) throw error;
     },
     onSuccess: () => {
@@ -262,7 +273,7 @@ function Inventory() {
                 onClick={() =>
                   downloadCsv(
                     "inventory.csv",
-                    toCsv(
+                    (
                       rows.map((r) => ({
                         Ingredient: r.name,
                         Stock: Number(r.current_stock),
@@ -412,7 +423,7 @@ function Inventory() {
               onClick={() =>
                 downloadCsv(
                   "suggested-order.csv",
-                  toCsv(
+                  (
                     orderRows.map((r) => ({
                       Ingredient: r.name,
                       Quantity: r.order,
@@ -451,7 +462,7 @@ function IngredientDialog({
   ingredient: Ingredient | null;
   suppliers: { id: string; name: string }[];
   onClose: () => void;
-  onSave: (payload: Record<string, unknown>) => void;
+  onSave: (payload: IngredientForm) => void;
   pending: boolean;
 }) {
   const [form, setForm] = useState({
