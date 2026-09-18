@@ -136,8 +136,9 @@ function Production() {
       note: string;
     }) => {
       const business = await supabase.from("businesses").select("id").limit(1).maybeSingle();
+      if (!business.data) throw new Error("No café found.");
       const { error } = await supabase.from("waste_records").insert({
-        business_id: business.data?.id,
+        business_id: business.data.id as string,
         location_id: locationId,
         product_id: item.product_id,
         quantity,
