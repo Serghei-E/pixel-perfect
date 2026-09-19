@@ -70,12 +70,11 @@ export function timeRange(startsAt: string, endsAt: string) {
   return `${f(startsAt)}–${f(endsAt)}`;
 }
 
-export function startOfWeek(date = new Date()) {
-  const d = new Date(date);
+export function startOfWeek(date: string = today()) {
+  const d = new Date(date + "T00:00:00");
   const day = (d.getDay() + 6) % 7; // Monday first
   d.setDate(d.getDate() - day);
-  d.setHours(0, 0, 0, 0);
-  return d;
+  return isoDate(d);
 }
 
 export type StockStatus = "In stock" | "Low stock" | "Critical" | "Out of stock";
