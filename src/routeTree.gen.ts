@@ -13,7 +13,9 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as DailyPlanRouteImport } from './routes/daily-plan'
 import { Route as InventoryRouteImport } from './routes/inventory'
+import { Route as MyShiftsRouteImport } from './routes/my-shifts'
 import { Route as ProductionRouteImport } from './routes/production'
+import { Route as StaffRouteImport } from './routes/staff'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -35,9 +37,19 @@ const InventoryRoute = InventoryRouteImport.update({
   path: '/inventory',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MyShiftsRoute = MyShiftsRouteImport.update({
+  id: '/my-shifts',
+  path: '/my-shifts',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProductionRoute = ProductionRouteImport.update({
   id: '/production',
   path: '/production',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StaffRoute = StaffRouteImport.update({
+  id: '/staff',
+  path: '/staff',
   getParentRoute: () => rootRouteImport,
 } as any)
 
@@ -46,14 +58,18 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/daily-plan': typeof DailyPlanRoute
   '/inventory': typeof InventoryRoute
+  '/my-shifts': typeof MyShiftsRoute
   '/production': typeof ProductionRoute
+  '/staff': typeof StaffRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/daily-plan': typeof DailyPlanRoute
   '/inventory': typeof InventoryRoute
+  '/my-shifts': typeof MyShiftsRoute
   '/production': typeof ProductionRoute
+  '/staff': typeof StaffRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -61,14 +77,38 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/daily-plan': typeof DailyPlanRoute
   '/inventory': typeof InventoryRoute
+  '/my-shifts': typeof MyShiftsRoute
   '/production': typeof ProductionRoute
+  '/staff': typeof StaffRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/daily-plan' | '/inventory' | '/production'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/daily-plan'
+    | '/inventory'
+    | '/my-shifts'
+    | '/production'
+    | '/staff'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/daily-plan' | '/inventory' | '/production'
-  id: '__root__' | '/' | '/auth' | '/daily-plan' | '/inventory' | '/production'
+  to:
+    | '/'
+    | '/auth'
+    | '/daily-plan'
+    | '/inventory'
+    | '/my-shifts'
+    | '/production'
+    | '/staff'
+  id:
+    | '__root__'
+    | '/'
+    | '/auth'
+    | '/daily-plan'
+    | '/inventory'
+    | '/my-shifts'
+    | '/production'
+    | '/staff'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -76,7 +116,9 @@ export interface RootRouteChildren {
   AuthRoute: typeof AuthRoute
   DailyPlanRoute: typeof DailyPlanRoute
   InventoryRoute: typeof InventoryRoute
+  MyShiftsRoute: typeof MyShiftsRoute
   ProductionRoute: typeof ProductionRoute
+  StaffRoute: typeof StaffRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -109,11 +151,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof InventoryRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/my-shifts': {
+      id: '/my-shifts'
+      path: '/my-shifts'
+      fullPath: '/my-shifts'
+      preLoaderRoute: typeof MyShiftsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/production': {
       id: '/production'
       path: '/production'
       fullPath: '/production'
       preLoaderRoute: typeof ProductionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/staff': {
+      id: '/staff'
+      path: '/staff'
+      fullPath: '/staff'
+      preLoaderRoute: typeof StaffRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -124,7 +180,9 @@ const rootRouteChildren: RootRouteChildren = {
   AuthRoute: AuthRoute,
   DailyPlanRoute: DailyPlanRoute,
   InventoryRoute: InventoryRoute,
+  MyShiftsRoute: MyShiftsRoute,
   ProductionRoute: ProductionRoute,
+  StaffRoute: StaffRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
