@@ -16,6 +16,7 @@ import { Route as InventoryRouteImport } from './routes/inventory'
 import { Route as MyShiftsRouteImport } from './routes/my-shifts'
 import { Route as ProductionRouteImport } from './routes/production'
 import { Route as StaffRouteImport } from './routes/staff'
+import { Route as WasteRouteImport } from './routes/waste'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -52,6 +53,11 @@ const StaffRoute = StaffRouteImport.update({
   path: '/staff',
   getParentRoute: () => rootRouteImport,
 } as any)
+const WasteRoute = WasteRouteImport.update({
+  id: '/waste',
+  path: '/waste',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -61,6 +67,7 @@ export interface FileRoutesByFullPath {
   '/my-shifts': typeof MyShiftsRoute
   '/production': typeof ProductionRoute
   '/staff': typeof StaffRoute
+  '/waste': typeof WasteRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -70,6 +77,7 @@ export interface FileRoutesByTo {
   '/my-shifts': typeof MyShiftsRoute
   '/production': typeof ProductionRoute
   '/staff': typeof StaffRoute
+  '/waste': typeof WasteRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -80,6 +88,7 @@ export interface FileRoutesById {
   '/my-shifts': typeof MyShiftsRoute
   '/production': typeof ProductionRoute
   '/staff': typeof StaffRoute
+  '/waste': typeof WasteRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -91,6 +100,7 @@ export interface FileRouteTypes {
     | '/my-shifts'
     | '/production'
     | '/staff'
+    | '/waste'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -100,6 +110,7 @@ export interface FileRouteTypes {
     | '/my-shifts'
     | '/production'
     | '/staff'
+    | '/waste'
   id:
     | '__root__'
     | '/'
@@ -109,6 +120,7 @@ export interface FileRouteTypes {
     | '/my-shifts'
     | '/production'
     | '/staff'
+    | '/waste'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -119,6 +131,7 @@ export interface RootRouteChildren {
   MyShiftsRoute: typeof MyShiftsRoute
   ProductionRoute: typeof ProductionRoute
   StaffRoute: typeof StaffRoute
+  WasteRoute: typeof WasteRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -172,6 +185,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StaffRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/waste': {
+      id: '/waste'
+      path: '/waste'
+      fullPath: '/waste'
+      preLoaderRoute: typeof WasteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -183,6 +203,7 @@ const rootRouteChildren: RootRouteChildren = {
   MyShiftsRoute: MyShiftsRoute,
   ProductionRoute: ProductionRoute,
   StaffRoute: StaffRoute,
+  WasteRoute: WasteRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
