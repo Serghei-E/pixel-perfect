@@ -273,8 +273,7 @@ function Inventory() {
                 onClick={() =>
                   downloadCsv(
                     "inventory.csv",
-                    (
-                      rows.map((r) => ({
+                    rows.map((r) => ({
                         Ingredient: r.name,
                         Stock: Number(r.current_stock),
                         Unit: r.unit,
@@ -282,8 +281,7 @@ function Inventory() {
                         "Days left": r.days ?? "",
                         Supplier: r.suppliers?.name ?? "",
                         Status: r.status,
-                      })),
-                    ),
+                    })),
                   )
                 }
               >
@@ -423,15 +421,13 @@ function Inventory() {
               onClick={() =>
                 downloadCsv(
                   "suggested-order.csv",
-                  (
-                    orderRows.map((r) => ({
+                  orderRows.map((r) => ({
                       Ingredient: r.name,
                       Quantity: r.order,
                       Unit: r.unit,
                       Supplier: r.suppliers?.name ?? "",
                       "Estimated cost": (r.order * Number(r.unit_cost)).toFixed(2),
-                    })),
-                  ),
+                  })),
                 )
               }
             >
