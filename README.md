@@ -22,3 +22,19 @@ cd <repository-name>
 npm i
 npm run dev
 ```
+
+
+## CaféFlow - DIG105
+
+CaféFlow helps independent café and bakery managers plan food preparation, manage inventory and schedule staff.
+
+Our goal is to reduce food waste, avoid stock shortages and save planning time.
+
+## Team Members
+- **Partner A:** Rebecca Leguss (@legussrebecca-cmyk) - Documentation & Media
+- **Partner B:** Serghei Eremei (@Serghei-E) - Technical Integration & User Research
+
+## Course Documentation
+- [Video diaries and PPP notes](./video-diaries/)
+- [Miro boards](./miro-boards/)
+- [Research and user testing](./documentation/)
