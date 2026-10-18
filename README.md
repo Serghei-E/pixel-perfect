@@ -1,9 +1,9 @@
 # Pixel Perfect - DIG105
 
 ## Overview
-* **Tagline:** [1-sentence description of what your app does]
+* **Tagline:** [Cafe daily operation assistant]
 * **Target Audience:** [Who is this for?]
-* **Deployed App:** [Link to working prototype - or type "Connected via Lovable"]
+* **Deployed App:** ["Connected via Lovable"]
 
 ## Team Members
 * **Partner A:** [Rebecca Leguss] (@legussrebecca-cmyk) - Documentation & Media
