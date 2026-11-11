@@ -76,9 +76,14 @@ function Dashboard() {
   const from = addDays(date, -13);
 
   const dash = useQuery({
-    queryKey: ["dashboard", date, locationId],
+    queryKey: ["dashboard", date, locationId, locations.length],
     queryFn: async () => {
       const loc = locationId === "all" ? null : locationId;
+      await Promise.all(
+        (loc ? [loc] : locations.map((l: { id: string }) => l.id)).map((id) =>
+          supabase.rpc("ensure_production_plan", { p_location: id, p_date: date }),
+        ),
+      );
       const salesQ = supabase
         .from("sales_records")
         .select("sold_on, quantity, revenue, location_id, products(name, category, unit_cost)")

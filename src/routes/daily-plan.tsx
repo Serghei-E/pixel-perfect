@@ -81,6 +81,7 @@ function DailyPlan() {
     queryKey: ["plan", date, locationId],
     enabled: Boolean(locationId),
     queryFn: async () => {
+      await supabase.rpc("ensure_production_plan", { p_location: locationId, p_date: date });
       const { data, error } = await supabase
         .from("production_plans")
         .select(

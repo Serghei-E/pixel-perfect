@@ -945,6 +945,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      ensure_production_plan: {
+        Args: { p_date: string; p_location: string }
+        Returns: string
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
