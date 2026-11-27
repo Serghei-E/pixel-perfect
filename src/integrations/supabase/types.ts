@@ -956,6 +956,10 @@ export type Database = {
         }
         Returns: boolean
       }
+      is_cafe_manager: { Args: never; Returns: boolean }
+      is_cafe_owner: { Args: never; Returns: boolean }
+      my_business_id: { Args: never; Returns: string }
+      my_profile_id: { Args: never; Returns: string }
     }
     Enums: {
       app_role: "owner" | "manager" | "staff"

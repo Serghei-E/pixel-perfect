@@ -8,6 +8,13 @@
       "when": 1794400352409,
       "tag": "0000_ensure_production_plan",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1795781829518,
+      "tag": "0001_scope_core_tables_to_cafe_team",
+      "breakpoints": true
     }
   ]
 }
